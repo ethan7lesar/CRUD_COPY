@@ -1,0 +1,28 @@
+{
+  "user1": {
+    "id": 1,
+    "name": "Ethan",
+    "surname": "Lesar",
+    "career": "GOAT"
+  },
+  "user2": {
+    "id": 2,
+    "name": "Asiphe",
+    "surname": "Ndimlana",
+    "career": "Child"
+  },
+  "user3": {
+    "id": 3,
+    "name": "Ayesha",
+    "surname": "Galant",
+    "career": "Child"
+  },
+  "user4": {
+    "user4": {
+      "id": 4,
+      "name": "Luke",
+      "surname": "Everton",
+      "career": "Son"
+    }
+  }
+}
