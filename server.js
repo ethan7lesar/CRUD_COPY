@@ -4,7 +4,7 @@ var fs = require("fs");
 var port = 8080;
 
 //Listing users
-app.get('/listUsers', function (req, res) {
+app.get('/', function (req, res) {
     fs.readFile( __dirname + "/" + "db.json", 'utf8', function (err, data) {
        console.log( data );
        res.end( data );
@@ -21,14 +21,14 @@ app.get("/addUser", (req, res) => {
       }
 
 const users = JSON.parse(data);
-const newUser = {
-"user4": {
-    "id":4 ,
+const newUser = 
+{
+    "id": 4,
     "name": "Luke",
     "surname":"Everton",
     "career": "Son"
-    }
- }
+ };
+ 
  
  users["user4"] = newUser;
 
@@ -57,41 +57,78 @@ const updatedData = JSON.stringify(users, null, 2);
 //  })
 
  //Update user
+// app.get("/updateUser/:id", (req, res) => {
+//     const userId = req.params.id;
+//     fs.readFile(__dirname + "/" + "db.json", "utf8", function (err, data) {
+//       if (err) {
+//         console.error("Error reading the file: ", err);
+//         return res.status(500).send("Error reading data.json file.");
+//       }
+  
+//       const users = JSON.parse(data);
+//       if (!users.hasOwnProperty(`user${userId}`)) {
+//         return res.status(404).send(`User with ID ${userId} not found.`);
+//       }
+  
+//       const updatedUser = {
+//         id: 3,
+//         name: "Sean",
+//         surname: "Lesar",
+//         career: "Father"
+//       };
+  
+//       users[`user${userId}`] = updatedUser;
+  
+//       const updatedData = JSON.stringify(users, null, 2);
+  
+//       fs.writeFile(__dirname + "/" + "db.json", updatedData, (err) => {
+//         if (err) {
+//           console.error("Error writing to data.json file: ", err);
+//           return res.status(500).send("Error writing data to file.");
+//         }
+  
+//         console.log(`User with ID ${userId} updated successfully!`);
+//         res.send(`User with ID ${userId} updated successfully!`);
+//       });
+//     });
+//   });
+
+// Update user
 app.get("/updateUser/:id", (req, res) => {
-    const userId = req.params.id;
-    fs.readFile(__dirname + "/" + "db.json", "utf8", function (err, data) {
+  const userId = req.params.id;
+  fs.readFile(__dirname + "/" + "db.json", "utf8", function (err, data) {
+    if (err) {
+      console.error("Error reading the file: ", err);
+      return res.status(500).send("Error reading db.json file.");
+    }
+
+    const users = JSON.parse(data);
+    if (!users.hasOwnProperty(`user${userId}`)) {
+      return res.status(404).send(`User with ID ${userId} not found.`);
+    }
+
+    // Get the existing user data
+    const existingUser = users[`user${userId}`];
+
+    // Update the fields you want to change
+    existingUser.name = "Ethan";
+    existingUser.surname = "Green";
+    existingUser.career = "Best";
+
+    const updatedData = JSON.stringify(users, null, 2);
+
+    fs.writeFile(__dirname + "/" + "db.json", updatedData, (err) => {
       if (err) {
-        console.error("Error reading the file: ", err);
-        return res.status(500).send("Error reading data.json file.");
+        console.error("Error writing to db.json file: ", err);
+        return res.status(500).send("Error writing data to file.");
       }
-  
-      const users = JSON.parse(data);
-      if (!users.hasOwnProperty(`user${userId}`)) {
-        return res.status(404).send(`User with ID ${userId} not found.`);
-      }
-  
-      const updatedUser = {
-        id: 3,
-        name: "Ayesha",
-        surname: "Galant",
-        career: "Child"
-      };
-  
-      users[`user${userId}`] = updatedUser;
-  
-      const updatedData = JSON.stringify(users, null, 2);
-  
-      fs.writeFile(__dirname + "/" + "db.json", updatedData, (err) => {
-        if (err) {
-          console.error("Error writing to data.json file: ", err);
-          return res.status(500).send("Error writing data to file.");
-        }
-  
-        console.log(`User with ID ${userId} updated successfully!`);
-        res.send(`User with ID ${userId} updated successfully!`);
-      });
+
+      console.log(`User with ID ${userId} updated successfully!`);
+      res.send(`User with ID ${userId} updated successfully!`);
     });
   });
+});
+
 
   //DELETE USER
   app.get("/deleteUser/:id", (req, res) => {

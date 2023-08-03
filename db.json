@@ -13,16 +13,14 @@
   },
   "user3": {
     "id": 3,
-    "name": "Ayesha",
-    "surname": "Galant",
-    "career": "Child"
+    "name": "Ethan",
+    "surname": "Green",
+    "career": "Best"
   },
   "user4": {
-    "user4": {
-      "id": 4,
-      "name": "Luke",
-      "surname": "Everton",
-      "career": "Son"
-    }
+    "id": 4,
+    "name": "Luke",
+    "surname": "Everton",
+    "career": "Son"
   }
 }
